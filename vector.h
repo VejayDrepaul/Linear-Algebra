@@ -6,7 +6,7 @@ void loop(void) {
     }
 }
 
-void arithmetic(double u[], char operation, double v[]) {
+double *arithmetic(double u[], char operation, double v[]) {
     if(operation == '+') {
         for (int i = 0; i < 4; i++) {
             result[i] = u[i] + v[i];
@@ -23,23 +23,27 @@ void arithmetic(double u[], char operation, double v[]) {
         }
     }
 
-    loop();
+    return result;
 }
 
-void scalar_product(double k, double v[]) {
+double *scalar_product(double k, double v[]) {
     for (int i = 0; i < 4; i++) {
-        result[i] = k * v[i];
+        v[i] = k * v[i];
     }
 
-    loop();
+    for (int i = 0; i < 4; i++) {
+        printf("%.1lf\n", v[i]);
+    }
+
+    return result;
 }
 
-void dot_product(double u[], double v[]) {
+int dot_product(double u[], double v[]) {
     double sum = 0;
 
     for (int i = 0; i < 4; i++) {
         sum += u[i] * v[i];    
     }
 
-    printf("%.1lf\n", sum);
+    return sum;
 }
