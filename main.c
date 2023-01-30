@@ -7,8 +7,7 @@ int main(void) {
     double u[] = {1, 2, 3, 4};
     double v[] = {1, 2, 3, 4};
 
-    double *result = arithmetic(u, '+', v);
-    result[2] = 3;
+    double *result = scalar_product(3, u);
     for (int i = 0; i < 4; i++) {
         printf("%lf\n", result[i]);
     }
