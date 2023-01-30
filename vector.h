@@ -1,9 +1,18 @@
-double result[4];
+#include <math.h>
 
-void loop(void) {
+double result[4];
+double cross[3];
+
+double norm(double v[]) {
+    double norm_val = 0;
+
     for (int i = 0; i < 4; i++) {
-        printf("%.1lf\n", result[i]);
+        norm_val += v[i] * v[i];
     }
+
+    norm_val = sqrt(norm_val);
+
+    return norm_val;
 }
 
 double *arithmetic(double u[], char operation, double v[]) {
@@ -28,17 +37,13 @@ double *arithmetic(double u[], char operation, double v[]) {
 
 double *scalar_product(double k, double v[]) {
     for (int i = 0; i < 4; i++) {
-        v[i] = k * v[i];
-    }
-
-    for (int i = 0; i < 4; i++) {
-        printf("%.1lf\n", v[i]);
+        result[i] = k * v[i];
     }
 
     return result;
 }
 
-int dot_product(double u[], double v[]) {
+double dot_product(double u[], double v[]) {
     double sum = 0;
 
     for (int i = 0; i < 4; i++) {
@@ -46,4 +51,24 @@ int dot_product(double u[], double v[]) {
     }
 
     return sum;
+}
+
+double *cross_product(double v[], double u[]) {
+    cross[0] = (v[1]*u[2]) - (v[2]*u[1]);
+    cross[1] = -((v[0]*u[2]) - (v[2]*u[0]));
+    cross[2] = (v[0]*u[1]) - (v[1]*u[0]);
+
+    return cross;
+}
+
+double *projection(double v[], double u[]) {
+    for (int i = 0; i < 3; i++) {
+        cross[i] = (dot_product(u, v) / (norm(v) * norm(v))) * v[i];
+    }
+
+    return cross;    
+}
+
+double angle(double v[], double u[]) {
+    
 }
